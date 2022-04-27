@@ -6,24 +6,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        @foreach($mycategory as $item)
         <li class="nav-item">
-          <a class="nav-link {{ ($active === "home") ? 'active' : '' }}" href="/">Home(Sospol)</a>
+          <a class="nav-link {{ ($active === $item->slug) ? 'active' : '' }}" href="/posts?category={{$item->slug}}">{{$item->name}}</a>
+        </li>
+        @endforeach
+        <li class="nav-item">
+          <a class="nav-link {{ ($active === "categories") ? 'active' : '' }}" href="/categories">Lainnya</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ ($active === "about") ? 'active' : '' }}" href="/about">About(Sastra)</a>
-        </li>  
-        <li class="nav-item">
-          <a class="nav-link {{ ($active === "posts") ? 'active' : '' }}" href="/posts">Blog(Iptek)</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {{ ($active === "categories") ? 'active' : '' }}" href="/categories">Categories(Lainnya)</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Tentang Kami</a>  
+          <a class="nav-link {{ ($active === "about") ? 'active' : '' }}" href="/about">Tentang Kami</a>  
         </li>
       </ul>
-
-      <ul class="navbar-nav ms-auto">
+      <div class="navbar-nav ms-auto" >
+      <!-- <form class="navbar-nav ms-auto" method="get" action="/posts">
+        <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+      </form> -->
+        <ul class="navbar-nav ms-auto">
           @auth
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,10 +42,12 @@
         </li>  
           @else 
           <li class="nav-item">
-            <a href="/login" class="nav-link {{ ($active === "login") ? 'active' : '' }}"><i class="bi bi-box-arrow-right"></i> Login</a>
+            <a href="/login" class="btn btn-info" style="margin-left: 5px;"><i class="bi bi-box-arrow-right"></i> Login</a>
           </li>
           @endauth
         </ul>
+      </div>
+      
       
     </div>
   </div>

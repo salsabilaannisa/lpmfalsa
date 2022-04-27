@@ -41,6 +41,13 @@
        </div> 
 
        <div class="mb-3">
+       @if($post->image)
+              <div style="max-height: 350px; overflow:hidden;">
+                <img src="{{ asset('storage/'.$post->image) }}" onerror="this.onerror=null;this.src='https://source.unsplash.com/1200x400?{{ $post->category->name }}';"  alt="{{ $post->category->name }}" class="img-fluid mt-3">
+              </div>
+            @else
+              <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" alt="{{ $post->category->name }}" class="img-fluid mt-3">
+            @endif
         <label for="image" class="form-label">Post Image</label>
         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
         @error('image') 
@@ -58,7 +65,16 @@
         <input id="body" type="hidden" name="body" value="{{ old('body', $post->body) }}">
         <trix-editor input="body"></trix-editor>
        </div> 
+
+       <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" name="status">
+          <option value="draf" @if($post->status == "draf") selected @endif>Draf</option>
+          <option value="pending" @if($post->status != "draf") selected @endif>Ajukan</option>
+        </select>
+       </div> 
       <button type="submit" class="btn btn-primary">Update Post</button>
+      <button type="reset" onclick="window.history.back()" class="btn btn-warning">kembali</button>
     </form>   
 </div>
 

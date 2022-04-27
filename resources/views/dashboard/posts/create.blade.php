@@ -55,7 +55,15 @@
         <input id="body" type="hidden" name="body" value="{{ old('body') }}">
         <trix-editor input="body"></trix-editor>
        </div> 
+       <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" name="status">
+          <option value="draf" selected>Draf</option>
+          <option value="pending" >Ajukan</option>
+        </select>
+       </div> 
       <button type="submit" class="btn btn-primary">Create Post</button>
+      <button type="reset" onclick="window.history.back()" class="btn btn-warning">kembali</button>
     </form>   
 </div>
 

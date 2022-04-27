@@ -17,12 +17,15 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->foreignId('category_id'); 
             $table->foreignId('user_id'); 
+            $table->foreignId('verified_id')->nullable(); 
             $table->string('title');
+            $table->string('status')->default('draf'); //isinya draf | pending | published | rejected | accepted
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->text('excerpt');
             $table->text('body');
             $table->timestamp('published_at')->nullable();
+            $table->timestamp('verified_at')->nullable();
             $table->timestamps();
         });
     }

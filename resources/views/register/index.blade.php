@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('dashboard.layouts.main')
 
 @section('container')
 <div class="row justify-content-center">
@@ -60,8 +60,9 @@
             </div>
         
             <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Register</button>
+            <button type="reset" onclick="window.history.back()" class="btn btn-warning">kembali</button>
           </form>
-          <small class="d-block text-center mt-3">Already Registered? <a href="/login">Login</a></small>
+          <!-- <small class="d-block text-center mt-3">Already Registered? <a href="/login">Login</a></small> -->
         </main>
     </div>
 </div>

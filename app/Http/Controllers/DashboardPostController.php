@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class DashboardPostController extends Controller
@@ -17,8 +18,14 @@ class DashboardPostController extends Controller
      */
     public function index()
     {
+        $post = [];
+        if(Auth::user()->hak_akses == 'reporter') {
+            $post = Post::where('user_id', auth()->user()->id)->get();
+        } else {
+            $post = Post::where('status', 'pending')->get();
+        }
         return view('dashboard.posts.index', [
-            'posts' => Post::where('user_id', auth()->user()->id)->get()
+            'posts' => $post
         ]);
     }
 
@@ -48,11 +55,13 @@ class DashboardPostController extends Controller
             'slug' => 'required|unique:posts', 
             'category_id' => 'required', 
             'image' => 'image|file|max:1024',
-            'body' => 'required'
+            'body' => 'required',
+            'status' => 'required',
         ]);
 
         if($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('post-images');
+            $validatedData['image'] = $request->file('image')->store('public/post-images');
+            $validatedData['image'] = str_replace('public/', '', $validatedData['image']);
         }
 
         $validatedData['user_id'] = auth()->user()->id;
@@ -102,7 +111,9 @@ class DashboardPostController extends Controller
         $rules = [
             'title' => 'required|max:255',
             'category_id' => 'required', 
-            'body' => 'required'
+            'image' => 'image|file|max:1024',
+            'body' => 'required',
+            'status' => 'required',
         ];
 
         if($request->slug != $post->slug) {
@@ -110,6 +121,12 @@ class DashboardPostController extends Controller
         }
 
         $validatedData = $request->validate($rules);
+
+        if($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('public/post-images');
+            $validatedData['image'] = str_replace('public/', '', $validatedData['image']);
+        }
+
 
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
@@ -138,5 +155,40 @@ class DashboardPostController extends Controller
     {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function confirm(Post $post, $val)
+    {
+        if($val == 0){
+            $validatedData = [
+                'status' => 'rejected',
+                'verified_id' => Auth::user()->id,
+                'verified_at' => now()
+            ];
+            $msg = 'Post has been rejected!';
+        }elseif($val == 1){
+            $validatedData = [
+                'status' => 'accepted',
+                'verified_id' => Auth::user()->id,
+                'verified_at' => now()
+            ];
+            $msg = 'Post has been accepted!';
+        }elseif($val == 2){
+            $validatedData = [
+                'status' => 'published',
+                'published_at' => now()
+            ];
+            $msg = 'Post has been published!';
+        }elseif($val == 3){
+            $validatedData = [
+                'status' => 'unpublished',
+                'published_at' => null
+            ];
+            $msg = 'Post has been unpublished!';
+        }
+        Post::where('slug', $post->slug)
+            ->update($validatedData);
+
+        return redirect('/dashboard/posts')->with('success', $msg);
     }
 }

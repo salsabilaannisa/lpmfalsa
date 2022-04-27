@@ -16,10 +16,19 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function list()
+    {
+        return view('register.list', [
+            'title' => 'Register', 
+            'active' => 'register',
+            'data' => User::all()
+        ]);
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nrk' => 'required',
+            'nrk' => ['required', 'unique:users'],
             'name' => 'required|max:255', 
             'username' => ['required', 'min:3', 'max:255', 'unique:users'],
             'email' => 'required|email:dns|unique:users', 
@@ -34,6 +43,6 @@ class RegisterController extends Controller
 
         // $request->session()->flash('success', 'Registration successfull! Please login');
 
-        return redirect('/login')->with('success', 'Registration successfull! Please login');
+        return redirect('/register/list')->with('success', 'Registration successfull');
     }
 }

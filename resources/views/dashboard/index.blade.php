@@ -5,7 +5,7 @@
     <h1 class="h2">Welcome back, {{ auth()->user()->name }}</h1>
 </div>
 
-<div>Selamat datang di halaman Reporter website UKM LPM Falsa Universitas Teknologi Digital Indonesia. Silahkan klik menu pilihan yang berada disebelah kiri untuk mengelola konten website.</div>
+<div>Selamat datang di halaman {{ auth()->user()->hak_akses }} website UKM LPM Falsa Universitas Teknologi Digital Indonesia. Silahkan klik menu pilihan yang berada disebelah kiri untuk mengelola konten website.</div>
 <br></br>
 <div>Terima Kasih.</div>
 @endsection 

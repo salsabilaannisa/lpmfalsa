@@ -10,6 +10,7 @@ class LoginController extends Controller
     public function index()
     {
         return view('login.index', [
+            "mycategory" => $this->MyCategory,
             'title' => 'Login', 
             'active' => 'login'
         ]);
