@@ -30,7 +30,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/register/list">
               <span data-feather="file-text"></span>
-              Register
+              My Users
             </a>
           </li>
           @endif

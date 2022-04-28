@@ -35,14 +35,26 @@ class RegisterController extends Controller
             'password' => 'required|min:6|max:255'
         ]);
 
-        // $validatedData['password'] = bcrypt($validatedData['password']);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::create($validatedData);
 
-        // $request->session()->flash('success', 'Registration successfull! Please login');
+        return redirect('/register/list')->with('success', 'Create User successfull');
+    }
 
-        return redirect('/register/list')->with('success', 'Registration successfull');
+    public function confirm(User $user, $val)
+    {
+        
+        $validatedData = [
+            'status' => $val,
+        ];
+
+        $msg = 'User has been '.$val.'!';
+
+        User::where('username', $user->username)
+            ->update($validatedData);
+
+        return redirect('/register/list')->with('success', $msg);
     }
 }

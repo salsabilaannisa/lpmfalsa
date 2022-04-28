@@ -55,6 +55,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('auth');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('auth');
 Route::get('/register/list', [RegisterController::class, 'list'])->middleware('auth');
+Route::post('/register/confirm/{user:username}/{val}', [RegisterController::class, 'confirm'])->middleware('auth');
 
 Route::get('/dashboard', function() {
     return view('dashboard.index');
