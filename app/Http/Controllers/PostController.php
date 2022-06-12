@@ -28,7 +28,7 @@ class PostController extends Controller
             "title" => "All Posts" . $title,
             "active" => $active,
             "mycategory" => $this->MyCategory,
-            "posts" => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString()
+            "posts" => Post::latest()->filter(request(['search', 'category', 'author']))->where('status', 'published')->paginate(7)->withQueryString()
         ]);
     }
 
@@ -39,7 +39,7 @@ class PostController extends Controller
             "title" => "Single Post",
             "active" => $category->slug,
             "mycategory" => $this->MyCategory,
-            "post" => $post
+            "post" => Post::where('id', $post->id)->where('status', 'published')->first()
         ]);
     }
 }
