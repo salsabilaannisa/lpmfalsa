@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">My Categories</h1>
+    <h1 class="h2">Kategori Berita</h1>
 </div>
 
 @if(session()->has('success'))
@@ -12,12 +12,12 @@
 @endif
 
 <div class="table-responsive col-lg-12">
-  <a href="/dashboard/categories/create" class="btn btn-primary mb-3">Create new categories</a>
+  <a href="/dashboard/categories/create" class="btn btn-primary mb-3">Tambah Kategori</a>
         <table class="dtables table table-striped table-sm">
           <thead>
             <tr>
-              <th width="30px" scope="col">#</th>
-              <th scope="col">Title</th>
+              <th width="30px" scope="col">No</th>
+              <th scope="col">Judul</th>
               <th width="80px" scope="col">Action</th>
             </tr>
           </thead>

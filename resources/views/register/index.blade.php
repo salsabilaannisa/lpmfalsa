@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Create New User</h1>
+  <h1 class="h2">Tambah Pengguna</h1>
 </div>
 
 <div class="col-lg-8">
@@ -22,7 +22,7 @@
 
     <div class="form-floating">
       <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name" required value="{{ old('name') }}">
-      <label for="name">Name</label>
+      <label for="name">Nama</label>
       @error('name')
       <div class="invalid-feedback">
         {{ $message }}
@@ -42,7 +42,7 @@
 
     <div class="form-floating">
       <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" required value="{{ old('email') }}">
-      <label for="email">Email address</label>
+      <label for="email">Alamat Email</label>
       @error('email')
       <div class="invalid-feedback">
         {{ $message }}
@@ -52,15 +52,15 @@
 
     <div class="form-floating">
       <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
-      <label for="password">Password</label>
+      <label for="password">Kata Sandi</label>
       @error('password')
       <div class="invalid-feedback">
         {{ $message }}
       </div>
       @enderror
     </div>
-    <button class="btn btn-primary mt-3" type="submit">Register</button>
-    <button type="reset" onclick="window.history.back()" class="btn btn-warning mt-3">kembali</button>
+    <button class="btn btn-primary mt-3" type="submit">Tambah</button>
+    <button type="reset" onclick="window.history.back()" class="btn btn-warning mt-3">Kembali</button>
   </form>
 </div>
 

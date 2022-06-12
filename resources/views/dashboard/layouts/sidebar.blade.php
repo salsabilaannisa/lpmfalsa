@@ -9,28 +9,28 @@
           </li>
           @if(auth()->user()->hak_akses == 'reporter')
           <li class="nav-item">
-            <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}" href="/dashboard/categories">
-              <span data-feather="file-text"></span>
-              My categories
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link {{ Request::is('dashboard/posts*') ? 'active' : '' }}" href="/dashboard/posts">
               <span data-feather="file-text"></span>
-              My Posts
+              Postingan
             </a>
           </li>
           @else
           <li class="nav-item">
+            <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}" href="/dashboard/categories">
+              <span data-feather="file-text"></span>
+              Kategori
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link {{ Request::is('dashboard/posts*') ? 'active' : '' }}" href="/dashboard/posts">
               <span data-feather="file-text"></span>
-              My Posts
+              Postingan
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/register/list">
               <span data-feather="file-text"></span>
-              My Users
+              Pengguna
             </a>
           </li>
           @endif

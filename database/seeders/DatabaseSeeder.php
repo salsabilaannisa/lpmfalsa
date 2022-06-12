@@ -17,23 +17,24 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         
+        
         User::create([
-            'nrk' => 'NRA/003/LPM_FALSA/I/20',
-            'name' => 'Annisa Salsabila',
-            'username' => 'annisasal', 
-            'email' => 'salsabilaannisa09@gmail.com',
-            'password' => bcrypt('12345'),
-            'hak_akses' => 'reporter'
-        ]);
-
-        User::create([
-            'name' => 'Adinda Daffa',
-            'username' => 'adinda',
-            'email' => 'adindadaffa@gmail.com',
+            'nrk' => 'NRA/004/LPM_FALSA/I/20',
+            'name' => 'Nurul Fajria',
+            'username' => 'fajria',
+            'email' => 'nurul.fajria@students.utdi.ac.id',
             'password' => bcrypt('12345'),
             'hak_akses' => 'pimpinan'
         ]);
 
+        User::create([
+            'nrk' => 'NRA/003/LPM_FALSA/I/20',
+            'name' => 'Annisa Salsabila',
+            'username' => 'annisasal', 
+            'email' => 'annisa.salsabila@students.utdi.ac.id',
+            'password' => bcrypt('12345'),
+            'hak_akses' => 'reporter'
+        ]);
 
         Category::create([
             'name' => 'Sospol', 

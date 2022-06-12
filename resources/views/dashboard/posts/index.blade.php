@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">My Posts</h1>
+  <h1 class="h2">Postingan</h1>
 </div>
 
 @if(session()->has('success'))
@@ -13,14 +13,15 @@
 
 <div class="table-responsive col-lg-12">
   @if(Auth::user()->hak_akses == 'reporter')
-  <a href="/dashboard/posts/create" class="btn btn-primary mb-3">Create new post</a>
+  <a href="/dashboard/posts/create" class="btn btn-primary mb-3">Tambah Postingan</a>
   @endif
   <table class="dtables table table-striped table-sm">
     <thead>
       <tr>
-        <th width="30px" scope="col">#</th>
-        <th scope="col">Title</th>
-        <th scope="col">Category</th>
+        <th width="30px" scope="col">No</th>
+        <th scope="col">Judul</th>
+        <th scope="col">Penulis</th>
+        <th scope="col">Kategori</th>
         @if(Auth::user()->hak_akses == 'reporter')
         <th scope="col">Status</th>
         @endif
@@ -32,6 +33,7 @@
       <tr>
         <td>{{ $loop->iteration }} </td>
         <td>{{ $post->title }}</td>
+        <td>{{ $post->author->name }}</td>
         <td>{{ $post->category->name }}</td>
         @if(Auth::user()->hak_akses == 'reporter')
         <td style="text-transform: capitalize;">{{ $post->status }}</td>
@@ -49,13 +51,13 @@
           <form action="/dashboard/posts/confirm/{{ $post->slug }}/2" method="post" class="d-inline">
             @method('post')
             @csrf
-            <button class="badge bg-success border-0" onclick="return confirm('Are you sure?')"><span data-feather="monitor"></span> Publish</button>
+            <button class="badge bg-success border-0" onclick="return confirm('Are you sure?')"><span data-feather="monitor"></span> Publikasi</button>
           </form>
           @elseif($post->status == 'published')
           <form action="/dashboard/posts/confirm/{{ $post->slug }}/3" method="post" class="d-inline">
             @method('post')
             @csrf
-            <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><span data-feather="x-circle"></span> Unpublish</button>
+            <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><span data-feather="x-circle"></span> Ditarik</button>
           </form>
           @endif
           @endif

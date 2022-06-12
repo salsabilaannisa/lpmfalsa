@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Edit Post</h1>
+    <h1 class="h2">Edit Postingan</h1>
 </div>
 
 <div class="col-lg-8">
@@ -10,7 +10,7 @@
       @method('put')
       @csrf 
       <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+        <label for="title" class="form-label">Judul</label>
         <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" required autofocus value="{{ old('title', $post->title) }}">
         @error('title') 
           <div class="invalid-feedback">
@@ -28,7 +28,7 @@
         @enderror 
       </div>
       <div class="mb-3">
-        <label for="category" class="form-label">Category</label>
+        <label for="category" class="form-label">Kategori</label>
         <select class="form-select" name="category_id">
           @foreach ($categories as $category )
             @if(old('category_id', $post->category_id) == $category->id)
@@ -48,7 +48,7 @@
             @else
               <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" alt="{{ $post->category->name }}" class="img-fluid mt-3">
             @endif
-        <label for="image" class="form-label">Post Image</label>
+        <label for="image" class="form-label">Gambar</label>
         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
         @error('image') 
           <div class="invalid-feedback">
@@ -58,7 +58,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="body" class="form-label">Body</label>
+        <label for="body" class="form-label">Isi Berita</label>
         @error('body')
         <p class="text-danger">{{ $message }}</p>
         @enderror 
@@ -73,8 +73,8 @@
           <option value="pending" @if($post->status != "draf") selected @endif>Ajukan</option>
         </select>
        </div> 
-      <button type="submit" class="btn btn-primary">Update Post</button>
-      <button type="reset" onclick="window.history.back()" class="btn btn-warning">kembali</button>
+      <button type="submit" class="btn btn-primary">Perbarui</button>
+      <button type="reset" onclick="window.history.back()" class="btn btn-warning">Kembali</button>
     </form>   
 </div>
 

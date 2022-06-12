@@ -16,7 +16,7 @@
 
       @if($post->image)
       <div style="max-height: 350px; overflow:hidden;">
-        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->category->name }}" class="img-fluid">
+        <img src="{{ asset('storage/public/' . $post->image) }}" onerror="this.onerror=null;this.src='https://source.unsplash.com/1200x400?Not-Found';" alt="{{ $post->category->name }}" class="img-fluid">
       </div>
       @else
       <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" alt="{{ $post->category->name }}" class="img-fluid">
@@ -26,7 +26,7 @@
         {!! $post->body !!}
       </article>
 
-      <a href="/posts" class="d-block mt-3">Back To Posts</a>
+      <a onclick="history.back()" class="d-block mt-3">Kembali ke Postingan</a>
     </div>
   </div>
 
